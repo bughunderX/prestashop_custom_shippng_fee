@@ -50,7 +50,7 @@ class DemoSymfonyForm extends Module
             [
                 'class_name' => 'AdminDemoSymfonyFormMultipleForms',
                 'visible' => true,
-                'name' => 'Admin symfony form multiple forms',
+                'name' => 'Custom Shipping Rules',
                 'parent_class_name' => 'CONFIGURE',
             ],
         ];

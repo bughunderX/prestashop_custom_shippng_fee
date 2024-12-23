@@ -16,13 +16,13 @@
   * @copyright Since 2007 PrestaShop SA and Contributors
   * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
   *#}
-{% set layoutHeaderToolbarBtn = {
+{# {% set layoutHeaderToolbarBtn = {
   'add' : {
     'href': path('demo_configuration_form'),
     'desc': 'Switch to Simple Forms',
     'icon': 'add_to_photos'
   }
-} %}
+} %} #}
 
 {% extends '@PrestaShop/Admin/layout.html.twig' %}
 {% form_theme demoConfigurationOtherForm '@PrestaShop/Admin/TwigTemplateForm/prestashop_ui_kit.html.twig' %}
@@ -37,43 +37,37 @@
     <div class="card-body">
       <div class="form-wrapper">
           <div class="form-group row">
-             
+
               <div class="col-sm">
-              <p>{{ 'No table data found.'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</p>
-              {{ dump(demoConfigurationOtherForm) }}
-              {% if demoConfigurationOtherForm.vars.value.table_data is not empty %}
-                  <table class="table table-bordered">
-                      <thead>
-                      <tr>
-                          <th>ID</th>
-                          <th>Name</th>
-                          <th>Price</th>
-                          <th>Quantity</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      {% for row in demoConfigurationOtherForm.vars.value.table_data %}
+                  {% if demoConfigurationOtherForm.vars.value.table_data is not empty %}
+                      <table class="table table-bordered">
+                          <thead>
                           <tr>
-                              <td>{{ row.id }}</td>
-                              <td>{{ row.name }}</td>
-                              <td>{{ row.price }}</td>
-                              <td>{{ row.quantity }}</td>
+                              <th>Country</th>
+                              <th>Start Fee</th>
+                              <th>Extra Fee</th>
+                              <th>Actions</th>
                           </tr>
-                      {% endfor %}
-                      </tbody>
-                  </table>
+                          </thead>
+                          <tbody>
+                          {% for row in demoConfigurationOtherForm.vars.value.table_data %}
+                              <tr>
+                                  <td><input type="text" class="form-control" value="{{ row.country }}"></td>
+                                  <td><input type="text" class="form-control" value="{{ row.start_fee }}"></td>
+                                  <td><input type="text" class="form-control" value="{{ row.extra_fee }}"></td>
+                                  <td>
+                                     <button class="btn btn-sm btn-primary save-row">Save</button>
+                                      <button class="btn btn-sm btn-danger delete-row" disabled>Delete</button>
+                                  </td>
+                              </tr>
+                          {% endfor %}
+                          </tbody>
+                      </table>
                   {% else %}
                       <p>{{ 'No table data found.'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</p>
                   {% endif %}
               </div>
           </div>
-      </div>
-    </div>
-    <div class="card-footer">
-      <div class="d-flex justify-content-end">
-        <button class="btn btn-primary float-right" id="save-button">
-          {{ 'Save'|trans({}, 'Admin.Actions') }}
-        </button>
       </div>
     </div>
   </div>

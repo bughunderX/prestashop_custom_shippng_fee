@@ -32,9 +32,9 @@ class DemoConfigurationOtherType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-       $builder->add('table_type', null, [
-            'label' => 'table',
-            'required' => false,
-        ]);
+    //    $builder->add('table_type', null, [
+    //         'label' => 'table',
+    //         'required' => false,
+    //     ]);
     }
 }
