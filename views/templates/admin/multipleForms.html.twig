@@ -70,6 +70,8 @@
                                   <option value="{{ country.id_country }}" {% if country.id_country == row.country %}selected{% endif %}>
                                     {{ country.name }}
                                   </option>
+                                      {{ country.name }}
+                                    </option>
                                   {% endfor %}
                                 </select>
                               </td>

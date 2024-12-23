@@ -55,13 +55,15 @@ class DemoConfigurationOtherFormDataProvider implements FormDataProviderInterfac
               'id' => 1,
                 'country' => 21,
                 'start_fee' => 10.99,
-                'extra_fee' => 100
+                'extra_fee' => 100,
+                'products' => [1, 2, 3]
             ],
             [
                 'id' => 2,
                 'country' => 8,
                 'start_fee' => 25.00,
-                'extra_fee' => 50
+                'extra_fee' => 50,
+                'products' => [4, 5, 6]
             ]
       ]];
          return $data;

@@ -42,6 +42,66 @@ class DemoSymfonyForm extends Module
         );
 
         $this->ps_versions_compliancy = ['min' => '8.0.0', 'max' => '9.99.99'];
+        
+
+
+    }
+
+    public function install()
+    {
+        return parent::install()
+            && $this->createShippingRulesTable()
+            && $this->createShippingRuleProductsTable(); // Add this line
+    }
+    
+    public function uninstall()
+    {
+        return parent::uninstall()
+            && $this->dropShippingRulesTable()
+            && $this->dropShippingRuleProductsTable(); // Add this line
+    }
+    
+    private function createShippingRulesTable()
+    {
+        $sql = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'shipping_rules` (
+            `id_shipping_rule` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+            `id_country` INT(11) NOT NULL,
+            `shipping_start_rate` DECIMAL(10, 2) NOT NULL,
+            `shipping_extra_rate` DECIMAL(10, 2) NOT NULL,
+            `date_add` DATETIME DEFAULT CURRENT_TIMESTAMP,
+            `date_upd` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            PRIMARY KEY (`id_shipping_rule`)
+        ) ENGINE=' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8mb4;';
+    
+        return Db::getInstance()->execute($sql);
+    }
+    
+    private function createShippingRuleProductsTable()
+    {
+        $sql = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'shipping_rule_products` (
+            `id_shipping_rule_product` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+            `id_shipping_rule` INT(11) UNSIGNED NOT NULL,
+            `id_product` INT(11) UNSIGNED NOT NULL,
+            `date_add` DATETIME DEFAULT CURRENT_TIMESTAMP,
+            `date_upd` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            PRIMARY KEY (`id_shipping_rule_product`),
+            FOREIGN KEY (`id_shipping_rule`) REFERENCES `' . _DB_PREFIX_ . 'shipping_rules`(`id_shipping_rule`) ON DELETE CASCADE,
+            FOREIGN KEY (`id_product`) REFERENCES `' . _DB_PREFIX_ . 'product`(`id_product`) ON DELETE CASCADE
+        ) ENGINE=' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8mb4;';
+    
+        return Db::getInstance()->execute($sql);
+    }
+    
+    private function dropShippingRulesTable()
+    {
+        $sql = 'DROP TABLE IF EXISTS `' . _DB_PREFIX_ . 'shipping_rules`';
+        return Db::getInstance()->execute($sql);
+    }
+    
+    private function dropShippingRuleProductsTable()
+    {
+        $sql = 'DROP TABLE IF EXISTS `' . _DB_PREFIX_ . 'shipping_rule_products`';
+        return Db::getInstance()->execute($sql);
     }
 
     public function getTabs()
