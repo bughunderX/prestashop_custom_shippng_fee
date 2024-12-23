@@ -53,13 +53,13 @@ class DemoConfigurationOtherFormDataProvider implements FormDataProviderInterfac
         $data =  ['table_data' => [
             [
               'id' => 1,
-                'country' => 'United States',
+                'country' => 21,
                 'start_fee' => 10.99,
                 'extra_fee' => 100
             ],
             [
                 'id' => 2,
-                'country' => 'France',
+                'country' => 8,
                 'start_fee' => 25.00,
                 'extra_fee' => 50
             ]

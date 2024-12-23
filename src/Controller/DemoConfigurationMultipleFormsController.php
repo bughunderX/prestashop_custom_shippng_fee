@@ -25,15 +25,20 @@ namespace PrestaShop\Module\DemoSymfonyForm\Controller;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
 class DemoConfigurationMultipleFormsController extends FrameworkBundleAdminController
 {
     public function index(Request $request): Response
     {
         $otherFormDataHandler = $this->get('prestashop.module.demosymfonyform.form.demo_configuration_other_form_data_handler');
         $otherForm = $otherFormDataHandler->getForm();
+        // $countries = \Symfony\Component\Intl\Countries::getNames();
+        $countries = \Country::getCountries($this->getContext()->language->id);
+        $products = \Product::getProducts($this->getContext()->language->id, 0, 0, 'id_product', 'ASC', false, true);
+
         return $this->render('@Modules/demosymfonyform/views/templates/admin/multipleForms.html.twig', [
             'demoConfigurationOtherForm' => $otherForm->createView(),
+            'countries' => $countries,
+            'products' => $products,
         ]);
     }
 

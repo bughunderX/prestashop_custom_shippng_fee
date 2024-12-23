@@ -26,6 +26,10 @@
 
 {% extends '@PrestaShop/Admin/layout.html.twig' %}
 {% form_theme demoConfigurationOtherForm '@PrestaShop/Admin/TwigTemplateForm/prestashop_ui_kit.html.twig' %}
+  {% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('../modules/demosymfonyform/views/css/multipleForms.css') }}" type="text/css" media="all">
+  {% endblock %}
 
 {% block content %}
 
@@ -37,12 +41,13 @@
     <div class="card-body">
       <div class="form-wrapper">
           <div class="form-group row">
-
+              {% dump(countries) %}
               <div class="col-sm">
                   {% if demoConfigurationOtherForm.vars.value.table_data is not empty %}
                       <table class="table table-bordered">
                           <thead>
                           <tr>
+                              <th>Products</th>
                               <th>Country</th>
                               <th>Start Fee</th>
                               <th>Extra Fee</th>
@@ -52,9 +57,26 @@
                           <tbody>
                           {% for row in demoConfigurationOtherForm.vars.value.table_data %}
                               <tr>
-                                  <td><input type="text" class="form-control" value="{{ row.country }}"></td>
-                                  <td><input type="text" class="form-control" value="{{ row.start_fee }}"></td>
-                                  <td><input type="text" class="form-control" value="{{ row.extra_fee }}"></td>
+                              <td>
+                                <select class="form-control" name="products[]" multiple data-multi-select>
+                                  {% for product in products %}
+                                    <option value="{{ product.id_product }}">{{ product.name }}</option>
+                                  {% endfor %}
+                                </select>
+                              </td>
+                              <td>
+                                <select class="form-control" name="countries[]">
+                                  {% for country in countries %}
+                                  <option value="{{ country.id_country }}" {% if country.id_country == row.country %}selected{% endif %}>
+                                    {{ country.name }}
+                                  </option>
+                                  {% endfor %}
+                                </select>
+                              </td>
+
+                                  {# <td><input type="text" class="form-control" value="{{ row.country }}"></td> #}
+                                  <td><input type="number" class="form-control" value="{{ row.start_fee }}"></td>
+                                  <td><input type="number" class="form-control" value="{{ row.extra_fee }}"></td>
                                   <td>
                                      <button class="btn btn-sm btn-primary save-row">Save</button>
                                       <button class="btn btn-sm btn-danger delete-row" disabled>Delete</button>
@@ -77,4 +99,5 @@
 {% block javascripts %}
   {{ parent() }}
   <script src="{{ asset('../modules/demosymfonyform/views/js/multipleForms.js') }}"></script>
+  <script src="{{ asset('../modules/demosymfonyform/views/js/MultiSelect.js') }}"></script>
 {% endblock %}
