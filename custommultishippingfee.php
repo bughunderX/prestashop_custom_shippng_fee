@@ -34,7 +34,7 @@ class CustomMultiShippingFee extends Module
         $this->bootstrap = true;
         parent::__construct();
 
-        $this->displayName = $this->trans('Demo symfony form configuration', [], 'Modules.CustomMultiShippingFee.Admin');
+        $this->displayName = $this->trans('Custom Multi Shipping Fee', [], 'Modules.CustomMultiShippingFee.Admin');
         $this->description = $this->trans(
             'Module created for the purpose of showing existing form types within PrestaShop',
             [],
