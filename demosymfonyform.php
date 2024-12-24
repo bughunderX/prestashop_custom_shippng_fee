@@ -51,14 +51,14 @@ class DemoSymfonyForm extends Module
     {
         return parent::install()
             && $this->createShippingRulesTable()
-            && $this->createShippingRuleProductsTable(); // Add this line
+            && $this->createShippingRuleProductsTable();
     }
     
     public function uninstall()
     {
         return parent::uninstall()
-            && $this->dropShippingRulesTable()
-            && $this->dropShippingRuleProductsTable(); // Add this line
+            && $this->dropShippingRuleProductsTable()
+            && $this->dropShippingRulesTable();
     }
     
     private function createShippingRulesTable()

@@ -58,7 +58,7 @@
           <div class="form-group row">
               <div class="col-sm">
                   <button class="btn btn-primary add-row mb-3">{{ 'Add Row'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</button>
-                  {% if shippingRules %}
+                  
                           <table class="table table-bordered" id='shipping-rules-table'>
                             <thead>
                               <tr>
@@ -100,9 +100,6 @@
                               {% endfor %}
                             </tbody>
                           </table>
-                  {% else %}
-                      <p>{{ 'No table data found.'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</p>
-                  {% endif %}
               </div>
           </div>
       </div>

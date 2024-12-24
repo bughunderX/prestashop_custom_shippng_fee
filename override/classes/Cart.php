@@ -59,26 +59,6 @@ class Cart extends CartCore
             $id_carrier = (int) $this->id_carrier;
         }
         
-        // if( $address_id ) {
-        //     $shipping_fee = 0;
-        //     $address = new Address($address_id);
-        //     $id_country = $address->id_country;
-        //     foreach ($products as $product) {
-        //         $productId = $product['id_product'];
-        //         $quantity = $product['cart_quantity'];
-        //         $shippingRules = Db::getInstance()->executeS('
-        //             SELECT * FROM `' . _DB_PREFIX_ . 'shipping_rules`
-        //             WHERE `id_country` = "' . (int)$id_country . '"
-        //             AND `id_product` = ' . (int)$productId
-        //         );
-        //         if ($shippingRules) {
-        //             $startRate = $shippingRules[0]['shipping_start_rate'];
-        //             $extraRate = $shippingRules[0]['shipping_extra_rate'];
-        //             $shipping_fee += ($startRate + $extraRate * ($quantity - 1));
-        //         }
-        //     }
-        //     return $shipping_fee;
-        // }
         if ($address_id) {
             $shipping_fee = 0;
             $address = new Address($address_id);
@@ -88,16 +68,14 @@ class Cart extends CartCore
             $productIds = array_map(function ($product) {
                 return (int)$product['id_product'];
             }, $products);
+            sort($productIds);
         
-            // Calculate the total quantity of all products in the cart
             $totalQuantity = array_reduce($products, function ($sum, $product) {
                 return $sum + (int)$product['cart_quantity'];
             }, 0);
         
-            // Prepare a comma-separated string of product IDs for SQL
             $productIdsList = implode(',', $productIds);
-        
-            // Fetch a shipping rule that exactly matches the products in the cart
+
             $shippingRule = Db::getInstance()->getRow('
                 SELECT sr.shipping_start_rate, sr.shipping_extra_rate
                 FROM `' . _DB_PREFIX_ . 'shipping_rules` sr
