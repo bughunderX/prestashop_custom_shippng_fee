@@ -20,7 +20,7 @@
 
 declare(strict_types=1);
 
-namespace PrestaShop\Module\DemoSymfonyForm\Form;
+namespace PrestaShop\Module\CustomMultiShippingFee\Form;
 
 use PrestaShop\PrestaShop\Core\ConstraintValidator\Constraints\TypedRegex;
 use PrestaShopBundle\Form\Admin\Type\FormattedTextareaType;
@@ -43,23 +43,23 @@ class DemoConfigurationTextType extends TranslatorAwareType
     {
         $builder
             ->add('formatted_text_area_type', FormattedTextareaType::class, [
-                'label' => $this->trans('Formatted text area type', 'Modules.DemoSymfonyForm.Admin'),
+                'label' => $this->trans('Formatted text area type', 'Modules.CustomMultiShippingFee.Admin'),
             ])
             ->add('generatable_text_type', GeneratableTextType::class, [
-                'label' => $this->trans('Generatable text type', 'Modules.DemoSymfonyForm.Admin'),
+                'label' => $this->trans('Generatable text type', 'Modules.CustomMultiShippingFee.Admin'),
                 'generated_value_length' => 5,
             ])
             ->add('text_with_length_counter_type', TextWithLengthCounterType::class, [
                 'max_length' => 50,
-                'label' => $this->trans('Text with length counter type', 'Modules.DemoSymfonyForm.Admin'),
+                'label' => $this->trans('Text with length counter type', 'Modules.CustomMultiShippingFee.Admin'),
             ])
             ->add('number_type_with_unit', NumberType::class, [
-                'label' => $this->trans('Number type with Unit extension', 'Modules.DemoSymfonyForm.Admin'),
+                'label' => $this->trans('Number type with Unit extension', 'Modules.CustomMultiShippingFee.Admin'),
                 'unit' => 'kg',
             ])
             ->add('translatable_type', TranslatableType::class, [
-                'label' => $this->trans('Translatable type', 'Modules.DemoSymfonyForm.Admin'),
-                'help' => $this->trans('Throws error if length is > 10 or text contains <>={}', 'Modules.DemoSymfonyForm.Admin'),
+                'label' => $this->trans('Translatable type', 'Modules.CustomMultiShippingFee.Admin'),
+                'help' => $this->trans('Throws error if length is > 10 or text contains <>={}', 'Modules.CustomMultiShippingFee.Admin'),
                 'options' => [
                     'constraints' => [
                         new TypedRegex([
@@ -73,8 +73,8 @@ class DemoConfigurationTextType extends TranslatorAwareType
             ]
             )
             ->add('translatable_text_area_type', TranslatableType::class, [
-                'label' => $this->trans('Translatable text area type', 'Modules.DemoSymfonyForm.Admin'),
-                'help' => $this->trans('Throws error if length is > 10 or text contains <>={}', 'Modules.DemoSymfonyForm.Admin'),
+                'label' => $this->trans('Translatable text area type', 'Modules.CustomMultiShippingFee.Admin'),
+                'help' => $this->trans('Throws error if length is > 10 or text contains <>={}', 'Modules.CustomMultiShippingFee.Admin'),
                 'type' => TextareaType::class,
                 'options' => [
                     'constraints' => [
@@ -89,8 +89,8 @@ class DemoConfigurationTextType extends TranslatorAwareType
             ]
             )
             ->add('translatable_formatted_text_area_type', TranslatableType::class, [
-                'label' => $this->trans('Translatable formatted text area type', 'Modules.DemoSymfonyForm.Admin'),
-                'help' => $this->trans('Throws error if length is > 30', 'Modules.DemoSymfonyForm.Admin'),
+                'label' => $this->trans('Translatable formatted text area type', 'Modules.CustomMultiShippingFee.Admin'),
+                'help' => $this->trans('Throws error if length is > 30', 'Modules.CustomMultiShippingFee.Admin'),
                 'type' => FormattedTextareaType::class,
                 'required' => false,
                 'options' => [
@@ -102,7 +102,7 @@ class DemoConfigurationTextType extends TranslatorAwareType
                 ],
             ])
             ->add('coordinates', GeoCoordinatesType::class,[
-                'label' => $this->trans('Geocoordinates type', 'Modules.DemoSymfonyForm.Admin'),
+                'label' => $this->trans('Geocoordinates type', 'Modules.CustomMultiShippingFee.Admin'),
             ]);
     }
 }

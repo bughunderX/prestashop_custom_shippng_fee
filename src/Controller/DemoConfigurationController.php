@@ -20,7 +20,7 @@
 
 declare(strict_types=1);
 
-namespace PrestaShop\Module\DemoSymfonyForm\Controller;
+namespace PrestaShop\Module\CustomMultiShippingFee\Controller;
 
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,7 +30,7 @@ class DemoConfigurationController extends FrameworkBundleAdminController
 {
     public function index(Request $request): Response
     {
-        $textFormDataHandler = $this->get('prestashop.module.demosymfonyform.form.demo_configuration_text_form_data_handler');
+        $textFormDataHandler = $this->get('prestashop.module.custommultishippingfee.form.demo_configuration_text_form_data_handler');
 
         $textForm = $textFormDataHandler->getForm();
         $textForm->handleRequest($request);
@@ -48,7 +48,7 @@ class DemoConfigurationController extends FrameworkBundleAdminController
             $this->flashErrors($errors);
         }
 
-        return $this->render('@Modules/demosymfonyform/views/templates/admin/form.html.twig', [
+        return $this->render('@Modules/custommultishippingfee/views/templates/admin/form.html.twig', [
             'demoConfigurationTextForm' => $textForm->createView(),
         ]);
     }

@@ -1,5 +1,5 @@
 {
-  "name": "prestashop/demosymfonyform",
+  "name": "prestashop/custommultishippingfee",
   "description": "PrestaShop - Form Examples",
   "license": "AFL-3.0",
   "authors": [
@@ -9,7 +9,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "PrestaShop\\Module\\DemoSymfonyForm\\": "src/"
+      "PrestaShop\\Module\\CustomMultiShippingFee\\": "src/"
     }
   },
   "require": {

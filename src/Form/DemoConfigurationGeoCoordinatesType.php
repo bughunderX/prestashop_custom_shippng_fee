@@ -25,7 +25,7 @@
  */
 declare(strict_types=1);
 
-namespace PrestaShop\Module\DemoSymfonyForm\Form;
+namespace PrestaShop\Module\CustomMultiShippingFee\Form;
 
 use PrestaShopBundle\Form\Admin\Type\GeoCoordinatesType;
 use Symfony\Component\Form\AbstractType;

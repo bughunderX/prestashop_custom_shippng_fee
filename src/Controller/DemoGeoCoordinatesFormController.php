@@ -20,9 +20,9 @@
 
 declare(strict_types=1);
 
-namespace PrestaShop\Module\DemoSymfonyForm\Controller;
+namespace PrestaShop\Module\CustomMultiShippingFee\Controller;
 
-use PrestaShop\Module\DemoSymfonyForm\Form\DemoConfigurationGeoCoordinatesType;
+use PrestaShop\Module\CustomMultiShippingFee\Form\DemoConfigurationGeoCoordinatesType;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,7 +33,7 @@ class DemoGeoCoordinatesFormController extends FrameworkBundleAdminController
     {
         $form = $this->createForm(DemoConfigurationGeoCoordinatesType::class);
 
-        return $this->render('@Modules/demosymfonyform/views/templates/admin/formGeoCoordinates.html.twig', [
+        return $this->render('@Modules/custommultishippingfee/views/templates/admin/formGeoCoordinates.html.twig', [
             'demoGeoCoordinatesForm' => $form->createView(),
         ]);
     }

@@ -3,79 +3,79 @@ services:
     public: true
 
   # Demo configuration text form
-  prestashop.module.demosymfonyform.form.type.demo_configuration_text:
-    class: 'PrestaShop\Module\DemoSymfonyForm\Form\DemoConfigurationTextType'
+  prestashop.module.custommultishippingfee.form.type.demo_configuration_text:
+    class: 'PrestaShop\Module\CustomMultiShippingFee\Form\DemoConfigurationTextType'
     parent: 'form.type.translatable.aware'
     public: true
     tags:
       - { name: form.type }
 
-  prestashop.module.demosymfonyform.form.demo_configuration_text_form_data_provider:
-    class: 'PrestaShop\Module\DemoSymfonyForm\Form\DemoConfigurationTextFormDataProvider'
+  prestashop.module.custommultishippingfee.form.demo_configuration_text_form_data_provider:
+    class: 'PrestaShop\Module\CustomMultiShippingFee\Form\DemoConfigurationTextFormDataProvider'
     arguments:
-      - '@prestashop.module.demosymfonyform.form.demo_configuration_text_data_configuration'
+      - '@prestashop.module.custommultishippingfee.form.demo_configuration_text_data_configuration'
 
-  prestashop.module.demosymfonyform.form.demo_configuration_text_form_data_handler:
+  prestashop.module.custommultishippingfee.form.demo_configuration_text_form_data_handler:
     class: 'PrestaShop\PrestaShop\Core\Form\Handler'
     arguments:
       - '@form.factory'
       - '@prestashop.core.hook.dispatcher'
-      - '@prestashop.module.demosymfonyform.form.demo_configuration_text_form_data_provider'
-      - 'PrestaShop\Module\DemoSymfonyForm\Form\DemoConfigurationTextType'
+      - '@prestashop.module.custommultishippingfee.form.demo_configuration_text_form_data_provider'
+      - 'PrestaShop\Module\CustomMultiShippingFee\Form\DemoConfigurationTextType'
       - 'DemoConfiguration'
 
-  prestashop.module.demosymfonyform.form.demo_configuration_text_data_configuration:
-    class: PrestaShop\Module\DemoSymfonyForm\Form\DemoConfigurationTextDataConfiguration
+  prestashop.module.custommultishippingfee.form.demo_configuration_text_data_configuration:
+    class: PrestaShop\Module\CustomMultiShippingFee\Form\DemoConfigurationTextDataConfiguration
     arguments: ['@prestashop.adapter.legacy.configuration']
 
   # Demo configuration choice form
-  prestashop.module.demosymfonyform.form.type.demo_configuration_choice:
-    class: 'PrestaShop\Module\DemoSymfonyForm\Form\DemoConfigurationChoiceType'
+  prestashop.module.custommultishippingfee.form.type.demo_configuration_choice:
+    class: 'PrestaShop\Module\CustomMultiShippingFee\Form\DemoConfigurationChoiceType'
     parent: 'form.type.translatable.aware'
     public: true
     tags:
       - { name: form.type }
 
-  prestashop.module.demosymfonyform.form.demo_configuration_choice_form_data_provider:
-    class: 'PrestaShop\Module\DemoSymfonyForm\Form\DemoConfigurationChoiceFormDataProvider'
+  prestashop.module.custommultishippingfee.form.demo_configuration_choice_form_data_provider:
+    class: 'PrestaShop\Module\CustomMultiShippingFee\Form\DemoConfigurationChoiceFormDataProvider'
     arguments:
-      - '@prestashop.module.demosymfonyform.form.demo_configuration_choice_data_configuration'
+      - '@prestashop.module.custommultishippingfee.form.demo_configuration_choice_data_configuration'
 
-  prestashop.module.demosymfonyform.form.demo_configuration_choice_form_data_handler:
+  prestashop.module.custommultishippingfee.form.demo_configuration_choice_form_data_handler:
     class: 'PrestaShop\PrestaShop\Core\Form\Handler'
     arguments:
       - '@form.factory'
       - '@prestashop.core.hook.dispatcher'
-      - '@prestashop.module.demosymfonyform.form.demo_configuration_choice_form_data_provider'
-      - 'PrestaShop\Module\DemoSymfonyForm\Form\DemoConfigurationChoiceType'
+      - '@prestashop.module.custommultishippingfee.form.demo_configuration_choice_form_data_provider'
+      - 'PrestaShop\Module\CustomMultiShippingFee\Form\DemoConfigurationChoiceType'
       - 'DemoConfiguration'
 
-  prestashop.module.demosymfonyform.form.demo_configuration_choice_data_configuration:
-    class: PrestaShop\Module\DemoSymfonyForm\Form\DemoConfigurationChoiceDataConfiguration
+  prestashop.module.custommultishippingfee.form.demo_configuration_choice_data_configuration:
+    class: PrestaShop\Module\CustomMultiShippingFee\Form\DemoConfigurationChoiceDataConfiguration
     arguments: [ '@prestashop.adapter.legacy.configuration' ]
 
   # Demo configuration other form
-  prestashop.module.demosymfonyform.form.type.demo_configuration_other:
-    class: 'PrestaShop\Module\DemoSymfonyForm\Form\DemoConfigurationOtherType'
+  prestashop.module.custommultishippingfee.form.type.demo_configuration_other:
+    class: 'PrestaShop\Module\CustomMultiShippingFee\Form\DemoConfigurationOtherType'
     parent: 'form.type.translatable.aware'
     public: true
     tags:
       - { name: form.type }
 
-  prestashop.module.demosymfonyform.form.demo_configuration_other_form_data_provider:
-    class: 'PrestaShop\Module\DemoSymfonyForm\Form\DemoConfigurationOtherFormDataProvider'
+  prestashop.module.custommultishippingfee.form.demo_configuration_other_form_data_provider:
+    class: 'PrestaShop\Module\CustomMultiShippingFee\Form\DemoConfigurationOtherFormDataProvider'
     arguments:
-      - '@prestashop.module.demosymfonyform.form.demo_configuration_other_data_configuration'
+      - '@prestashop.module.custommultishippingfee.form.demo_configuration_other_data_configuration'
 
-  prestashop.module.demosymfonyform.form.demo_configuration_other_form_data_handler:
+  prestashop.module.custommultishippingfee.form.demo_configuration_other_form_data_handler:
     class: 'PrestaShop\PrestaShop\Core\Form\Handler'
     arguments:
       - '@form.factory'
       - '@prestashop.core.hook.dispatcher'
-      - '@prestashop.module.demosymfonyform.form.demo_configuration_other_form_data_provider'
-      - 'PrestaShop\Module\DemoSymfonyForm\Form\DemoConfigurationOtherType'
+      - '@prestashop.module.custommultishippingfee.form.demo_configuration_other_form_data_provider'
+      - 'PrestaShop\Module\CustomMultiShippingFee\Form\DemoConfigurationOtherType'
       - 'DemoConfiguration'
 
-  prestashop.module.demosymfonyform.form.demo_configuration_other_data_configuration:
-    class: PrestaShop\Module\DemoSymfonyForm\Form\DemoConfigurationOtherDataConfiguration
+  prestashop.module.custommultishippingfee.form.demo_configuration_other_data_configuration:
+    class: PrestaShop\Module\CustomMultiShippingFee\Form\DemoConfigurationOtherDataConfiguration
     arguments: [ '@prestashop.adapter.legacy.configuration' ]

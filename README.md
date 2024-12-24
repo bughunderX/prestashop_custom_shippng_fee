@@ -7,7 +7,7 @@ This module demonstrates how to use existing PrestaShop Symfony form types insid
 It provides two demo pages where all possible [form types](https://symfony.com/doc/current/reference/forms/types.html)
 are being used. You can use these pages as examples of how to integrate these inputs in a module.
 
-![Demo Symfony Form Screenshot](demosymfonyform-screenshot.jpeg)
+![Demo Symfony Form Screenshot](custommultishippingfee-screenshot.jpeg)
 
 ### Supported PrestaShop versions
 
@@ -20,7 +20,7 @@ This module is compatible with PS 8.0.x versions only.
 ### How to install
  
 1. Download or clone module into `modules` directory of your PrestaShop installation
-2. Rename the directory to make sure that module directory is named `demosymfonyform`*
+2. Rename the directory to make sure that module directory is named `custommultishippingfee`*
 3. `cd` into module's directory and run following commands:
   - `composer install` - to download dependencies into vendor folder
 4. Install module from Back Office

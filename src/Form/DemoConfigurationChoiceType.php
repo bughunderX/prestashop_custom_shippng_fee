@@ -20,7 +20,7 @@
 
 declare(strict_types=1);
 
-namespace PrestaShop\Module\DemoSymfonyForm\Form;
+namespace PrestaShop\Module\CustomMultiShippingFee\Form;
 
 use PrestaShopBundle\Form\Admin\Type\CategoryChoiceTreeType;
 use PrestaShopBundle\Form\Admin\Type\CountryChoiceType;
@@ -46,7 +46,7 @@ class DemoConfigurationChoiceType extends TranslatorAwareType
                 'category_choice_tree_type',
                 CategoryChoiceTreeType::class,
                 [
-                    'label' => $this->trans('Category choice type', 'Modules.DemoSymfonyForm.Admin'),
+                    'label' => $this->trans('Category choice type', 'Modules.CustomMultiShippingFee.Admin'),
                     'disabled_values' => $disabledCategories,
                 ]
             )
@@ -54,7 +54,7 @@ class DemoConfigurationChoiceType extends TranslatorAwareType
                 'country_choice_type',
                 CountryChoiceType::class,
                 [
-                    'label' => $this->trans('Country choice type', 'Modules.DemoSymfonyForm.Admin'),
+                    'label' => $this->trans('Country choice type', 'Modules.CustomMultiShippingFee.Admin'),
                     'required' => true,
                     'with_dni_attr' => true,
                     'with_postcode_attr' => true,
@@ -64,10 +64,10 @@ class DemoConfigurationChoiceType extends TranslatorAwareType
                 'material_choice_table_type',
                 MaterialChoiceTableType::class,
                 [
-                    'label' => $this->trans('Material choice table type', 'Modules.DemoSymfonyForm.Admin'),
+                    'label' => $this->trans('Material choice table type', 'Modules.CustomMultiShippingFee.Admin'),
                     'choices' => [
-                        $this->trans('Choice 1', 'Modules.DemoSymfonyForm.Admin') => '1',
-                        $this->trans('Choice 2', 'Modules.DemoSymfonyForm.Admin') => '2',
+                        $this->trans('Choice 1', 'Modules.CustomMultiShippingFee.Admin') => '1',
+                        $this->trans('Choice 2', 'Modules.CustomMultiShippingFee.Admin') => '2',
                     ],
                 ]
             )
@@ -75,24 +75,24 @@ class DemoConfigurationChoiceType extends TranslatorAwareType
                 'material_choice_tree_type',
                 MaterialChoiceTreeType::class,
                 [
-                    'label' => $this->trans('Material choice tree type', 'Modules.DemoSymfonyForm.Admin'),
+                    'label' => $this->trans('Material choice tree type', 'Modules.CustomMultiShippingFee.Admin'),
                     'choice_value' => 'id_choice',
                     'choices_tree' => [
                         '1' => [
                             'id_choice' => 1,
-                            'name' => $this->trans('Choice 1', 'Modules.DemoSymfonyForm.Admin'),
+                            'name' => $this->trans('Choice 1', 'Modules.CustomMultiShippingFee.Admin'),
                         ],
                         '2' => [
                             'id_choice' => 2,
-                            'name' => $this->trans('Choice 2', 'Modules.DemoSymfonyForm.Admin'),
+                            'name' => $this->trans('Choice 2', 'Modules.CustomMultiShippingFee.Admin'),
                             'children' => [
                                 '3' => [
                                     'id_choice' => 3,
-                                    'name' => $this->trans('Choice 3', 'Modules.DemoSymfonyForm.Admin'),
+                                    'name' => $this->trans('Choice 3', 'Modules.CustomMultiShippingFee.Admin'),
                                 ],
                                 '4' => [
                                     'id_choice' => 4,
-                                    'name' => $this->trans('Choice 4', 'Modules.DemoSymfonyForm.Admin'),
+                                    'name' => $this->trans('Choice 4', 'Modules.CustomMultiShippingFee.Admin'),
                                 ],
                             ],
                         ],
@@ -103,31 +103,31 @@ class DemoConfigurationChoiceType extends TranslatorAwareType
                 'material_choice_multiple_choices_table',
                 MaterialMultipleChoiceTableType::class,
                 [
-                    'label' => $this->trans('Material choice multiple choices table type', 'Modules.DemoSymfonyForm.Admin'),
+                    'label' => $this->trans('Material choice multiple choices table type', 'Modules.CustomMultiShippingFee.Admin'),
                     'choices' => [
-                        $this->trans('Vertical choice 1', 'Modules.DemoSymfonyForm.Admin') => '1',
-                        $this->trans('Vertical choice 2', 'Modules.DemoSymfonyForm.Admin') => '2',
-                        $this->trans('Vertical choice 3', 'Modules.DemoSymfonyForm.Admin') => '3',
+                        $this->trans('Vertical choice 1', 'Modules.CustomMultiShippingFee.Admin') => '1',
+                        $this->trans('Vertical choice 2', 'Modules.CustomMultiShippingFee.Admin') => '2',
+                        $this->trans('Vertical choice 3', 'Modules.CustomMultiShippingFee.Admin') => '3',
                     ],
                     'multiple_choices' => [
                         [
                             'name' => 'choice_1',
-                            'label' => $this->trans('Horizontal choice 1', 'Modules.DemoSymfonyForm.Admin'),
+                            'label' => $this->trans('Horizontal choice 1', 'Modules.CustomMultiShippingFee.Admin'),
                             'multiple' => true,
                             /* You need choices array for the second time to be able to choose which horizontal choices are available for this vertical choice  */
                             'choices' => [
-                                $this->trans('Vertical choice 1', 'Modules.DemoSymfonyForm.Admin') => '1',
-                                $this->trans('Vertical choice 2', 'Modules.DemoSymfonyForm.Admin') => '2',
+                                $this->trans('Vertical choice 1', 'Modules.CustomMultiShippingFee.Admin') => '1',
+                                $this->trans('Vertical choice 2', 'Modules.CustomMultiShippingFee.Admin') => '2',
                             ],
                         ],
                         [
                             'name' => 'choice_2',
-                            'label' => $this->trans('Horizontal choice 2', 'Modules.DemoSymfonyForm.Admin'),
+                            'label' => $this->trans('Horizontal choice 2', 'Modules.CustomMultiShippingFee.Admin'),
                             'multiple' => true,
                             'choices' => [
-                                $this->trans('Vertical choice 1', 'Modules.DemoSymfonyForm.Admin') => '1',
-                                $this->trans('Vertical choice 2', 'Modules.DemoSymfonyForm.Admin') => '2',
-                                $this->trans('Vertical choice 3', 'Modules.DemoSymfonyForm.Admin') => '3',
+                                $this->trans('Vertical choice 1', 'Modules.CustomMultiShippingFee.Admin') => '1',
+                                $this->trans('Vertical choice 2', 'Modules.CustomMultiShippingFee.Admin') => '2',
+                                $this->trans('Vertical choice 3', 'Modules.CustomMultiShippingFee.Admin') => '3',
                             ],
                         ],
                     ],
@@ -136,14 +136,14 @@ class DemoConfigurationChoiceType extends TranslatorAwareType
             ->add('shop_choices_tree_type',
                 ShopChoiceTreeType::class,
                 [
-                    'label' => $this->trans('Material choice tree type', 'Modules.DemoSymfonyForm.Admin'),
+                    'label' => $this->trans('Material choice tree type', 'Modules.CustomMultiShippingFee.Admin'),
                 ]
             )
             ->add(
                 'switch_type',
                 SwitchType::class,
                 [
-                    'label' => $this->trans('Switch type', 'Modules.DemoSymfonyForm.Admin'),
+                    'label' => $this->trans('Switch type', 'Modules.CustomMultiShippingFee.Admin'),
                 ]
             );
     }

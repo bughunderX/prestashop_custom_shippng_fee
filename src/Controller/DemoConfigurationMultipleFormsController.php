@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PrestaShop\Module\DemoSymfonyForm\Controller;
+namespace PrestaShop\Module\CustomMultiShippingFee\Controller;
 
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +15,7 @@ class DemoConfigurationMultipleFormsController extends FrameworkBundleAdminContr
 {
     public function index(Request $request): Response
     {
-        $otherFormDataHandler = $this->get('prestashop.module.demosymfonyform.form.demo_configuration_other_form_data_handler');
+        $otherFormDataHandler = $this->get('prestashop.module.custommultishippingfee.form.demo_configuration_other_form_data_handler');
         $otherForm = $otherFormDataHandler->getForm();
         $countries = \Country::getCountries($this->getContext()->language->id);
         $products = \Product::getProducts($this->getContext()->language->id, 0, 0, 'id_product', 'ASC', false, true);
@@ -40,7 +40,7 @@ class DemoConfigurationMultipleFormsController extends FrameworkBundleAdminContr
         $updateShippingRuleUrl = $this->generateUrl('update_shipping_rule');
         $deleteShippingRuleUrl = $this->generateUrl('delete_shipping_rule');
 
-        return $this->render('@Modules/demosymfonyform/views/templates/admin/multipleForms.html.twig', [
+        return $this->render('@Modules/custommultishippingfee/views/templates/admin/multipleForms.html.twig', [
             'demoConfigurationOtherForm' => $otherForm->createView(),
             'countries' => $countries,
             'products' => $products,

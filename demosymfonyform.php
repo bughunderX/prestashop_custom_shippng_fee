@@ -22,11 +22,11 @@ declare(strict_types=1);
 
 use PrestaShop\PrestaShop\Adapter\SymfonyContainer;
 
-class DemoSymfonyForm extends Module
+class CustomMultiShippingFee extends Module
 {
     public function __construct()
     {
-        $this->name = 'demosymfonyform';
+        $this->name = 'custommultishippingfee';
         $this->author = 'PrestaShop';
         $this->version = '1.1.0';
         $this->need_instance = 0;
@@ -34,11 +34,11 @@ class DemoSymfonyForm extends Module
         $this->bootstrap = true;
         parent::__construct();
 
-        $this->displayName = $this->trans('Demo symfony form configuration', [], 'Modules.DemoSymfonyForm.Admin');
+        $this->displayName = $this->trans('Demo symfony form configuration', [], 'Modules.CustomMultiShippingFee.Admin');
         $this->description = $this->trans(
             'Module created for the purpose of showing existing form types within PrestaShop',
             [],
-            'Modules.DemoSymfonyForm.Admin'
+            'Modules.CustomMultiShippingFee.Admin'
         );
 
         $this->ps_versions_compliancy = ['min' => '8.0.0', 'max' => '9.99.99'];
@@ -108,7 +108,7 @@ class DemoSymfonyForm extends Module
     {
         return [
             [
-                'class_name' => 'AdminDemoSymfonyFormMultipleForms',
+                'class_name' => 'AdminCustomMultiShippingFeeMultipleForms',
                 'visible' => true,
                 'name' => 'Custom Shipping Rules',
                 'parent_class_name' => 'CONFIGURE',

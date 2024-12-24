@@ -1,33 +1,33 @@
 demo_configuration_form:
-  path: /demosymfonyform/configuration
+  path: /custommultishippingfee/configuration
   methods: [GET, POST]
   defaults:
-    _controller: 'PrestaShop\Module\DemoSymfonyForm\Controller\DemoConfigurationController::index'
+    _controller: 'PrestaShop\Module\CustomMultiShippingFee\Controller\DemoConfigurationController::index'
     # Needed to work with tab system
-    _legacy_controller: AdminDemoSymfonyForm
-    _legacy_link: AdminDemoSymfonyForm
+    _legacy_controller: AdminCustomMultiShippingFee
+    _legacy_link: AdminCustomMultiShippingFee
 
 demo_configuration_multiple_forms:
-  path: /demosymfonyform/configurationMultipleForms
+  path: /custommultishippingfee/configurationMultipleForms
   methods: [GET]
   defaults:
-    _controller: 'PrestaShop\Module\DemoSymfonyForm\Controller\DemoConfigurationMultipleFormsController::index'
-    _legacy_controller: AdminDemoSymfonyFormMultipleForms
-    _legacy_link: AdminDemoSymfonyFormMultipleForms
+    _controller: 'PrestaShop\Module\CustomMultiShippingFee\Controller\DemoConfigurationMultipleFormsController::index'
+    _legacy_controller: AdminCustomMultiShippingFeeMultipleForms
+    _legacy_link: AdminCustomMultiShippingFeeMultipleForms
 
 create_shipping_rule:
   path: /admin/demo-configuration-multiple-forms/create-shipping-rule
   methods: [POST]
   defaults:
-    _controller: 'PrestaShop\Module\DemoSymfonyForm\Controller\DemoConfigurationMultipleFormsController::createShippingRule'
+    _controller: 'PrestaShop\Module\CustomMultiShippingFee\Controller\DemoConfigurationMultipleFormsController::createShippingRule'
 update_shipping_rule:
   path: /admin/demo-configuration-multiple-forms/update-shipping-rule
   methods: [POST]
   defaults:
-    _controller: 'PrestaShop\Module\DemoSymfonyForm\Controller\DemoConfigurationMultipleFormsController::updateShippingRule'
+    _controller: 'PrestaShop\Module\CustomMultiShippingFee\Controller\DemoConfigurationMultipleFormsController::updateShippingRule'
 
 delete_shipping_rule:
   path: /admin/demo-configuration-multiple-forms/delete-shipping-rule
   methods: [POST]
   defaults:
-    _controller: 'PrestaShop\Module\DemoSymfonyForm\Controller\DemoConfigurationMultipleFormsController::deleteShippingRule'
+    _controller: 'PrestaShop\Module\CustomMultiShippingFee\Controller\DemoConfigurationMultipleFormsController::deleteShippingRule'

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
-    <name>demosymfonyform</name>
+    <name>custommultishippingfee</name>
     <displayName><![CDATA[Demo symfony form configuration]]></displayName>
     <version><![CDATA[1.1.0]]></version>
     <description><![CDATA[Module created for the purpose of showing existing form types within PrestaShop]]></description>

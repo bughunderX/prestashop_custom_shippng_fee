@@ -28,7 +28,7 @@
 {% form_theme demoConfigurationOtherForm '@PrestaShop/Admin/TwigTemplateForm/prestashop_ui_kit.html.twig' %}
   {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('../modules/demosymfonyform/views/css/multipleForms.css') }}" type="text/css" media="all">
+    <link rel="stylesheet" href="{{ asset('../modules/custommultishippingfee/views/css/multipleForms.css') }}" type="text/css" media="all">
   {% endblock %}
 
 {% block javascripts %}
@@ -41,15 +41,15 @@
         const updateShippingRuleUrl = '{{ updateShippingRuleUrl }}';
         const deleteShippingRuleUrl = '{{ deleteShippingRuleUrl }}';
     </script>
-  <script src="{{ asset('../modules/demosymfonyform/views/js/multipleForms.js') }}"></script>
-  <script src="{{ asset('../modules/demosymfonyform/views/js/MultiSelect.js') }}"></script>
+  <script src="{{ asset('../modules/custommultishippingfee/views/js/multipleForms.js') }}"></script>
+  <script src="{{ asset('../modules/custommultishippingfee/views/js/MultiSelect.js') }}"></script>
 {% endblock %}
 {% block content %}
 
   {{ form_start(demoConfigurationOtherForm, {attr : {class: 'form'}, action: path('demo_configuration_multiple_forms') }) }}
   <div class="card">
     <h3 class="card-header">
-      <i class="material-icons">settings</i> {{ 'Table Data'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}
+      <i class="material-icons">settings</i> {{ 'Table Data'|trans({}, 'Modules.CustomMultiShippingFee.Admin') }}
     </h3>
     <div class="card-body">
 
@@ -57,16 +57,16 @@
       <div class="form-wrapper">
           <div class="form-group row">
               <div class="col-sm">
-                  <button class="btn btn-primary add-row mb-3">{{ 'Add Row'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</button>
+                  <button class="btn btn-primary add-row mb-3">{{ 'Add Row'|trans({}, 'Modules.CustomMultiShippingFee.Admin') }}</button>
                   
                           <table class="table table-bordered" id='shipping-rules-table'>
                             <thead>
                               <tr>
-                                <th>{{ 'Products'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</th>
-                                <th>{{ 'Country'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</th>
-                                <th>{{ 'Start Fee'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</th>
-                                <th>{{ 'Extra Fee'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</th>
-                                <th>{{ 'Actions'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</th>
+                                <th>{{ 'Products'|trans({}, 'Modules.CustomMultiShippingFee.Admin') }}</th>
+                                <th>{{ 'Country'|trans({}, 'Modules.CustomMultiShippingFee.Admin') }}</th>
+                                <th>{{ 'Start Fee'|trans({}, 'Modules.CustomMultiShippingFee.Admin') }}</th>
+                                <th>{{ 'Extra Fee'|trans({}, 'Modules.CustomMultiShippingFee.Admin') }}</th>
+                                <th>{{ 'Actions'|trans({}, 'Modules.CustomMultiShippingFee.Admin') }}</th>
                               </tr>
                             </thead>
                             <tbody id="shipping-rules-table">
@@ -93,8 +93,8 @@
                                   <td><input type="number" class="form-control" name="start_fee" value="{{ row.shipping_start_rate }}"></td>
                                   <td><input type="number" class="form-control" name="extra_fee" value="{{ row.shipping_extra_rate }}"></td>
                                   <td>
-                                    <button class="btn btn-success save-row">{{ 'Update'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</button>
-                                    <button class="btn btn-danger delete-row">{{ 'Delete'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</button>
+                                    <button class="btn btn-success save-row">{{ 'Update'|trans({}, 'Modules.CustomMultiShippingFee.Admin') }}</button>
+                                    <button class="btn btn-danger delete-row">{{ 'Delete'|trans({}, 'Modules.CustomMultiShippingFee.Admin') }}</button>
                                   </td>
                                 </tr>
                               {% endfor %}

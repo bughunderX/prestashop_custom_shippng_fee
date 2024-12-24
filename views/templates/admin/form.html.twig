@@ -33,7 +33,7 @@
   {{ form_start(demoConfigurationTextForm) }}
   <div class="card">
     <h3 class="card-header">
-      <i class="material-icons">settings</i> {{ 'Text form types'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}
+      <i class="material-icons">settings</i> {{ 'Text form types'|trans({}, 'Modules.CustomMultiShippingFee.Admin') }}
     </h3>
     <div class="card-body">
       <div class="form-wrapper">
@@ -53,5 +53,5 @@
 
 {% block javascripts %}
   {{ parent() }}
-  <script src="{{ asset('../modules/demosymfonyform/views/js/form.js') }}"></script>
+  <script src="{{ asset('../modules/custommultishippingfee/views/js/form.js') }}"></script>
 {% endblock %}
