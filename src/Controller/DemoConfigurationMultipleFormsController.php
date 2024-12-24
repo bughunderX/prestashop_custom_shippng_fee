@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class DemoConfigurationMultipleFormsController extends FrameworkBundleAdminController
 {
@@ -32,7 +33,7 @@ class DemoConfigurationMultipleFormsController extends FrameworkBundleAdminContr
             GROUP BY sr.id_shipping_rule
         ');
         foreach ($shippingRules as &$rule) {
-            $rule['product_ids'] = !empty($rule['product_ids']) ? explode(',', $rule['product_ids']) : [];
+            $rule['product_ids'] = !empty($rule['product_ids']) ? array_map('intval', explode(',', $rule['product_ids'])) : [];
         }
         
         $addShippingRuleUrl = $this->generateUrl('create_shipping_rule');
@@ -50,7 +51,7 @@ class DemoConfigurationMultipleFormsController extends FrameworkBundleAdminContr
         ]);
     }
 
-    public function createShippingRule(Request $request): RedirectResponse
+    public function createShippingRule(Request $request): JsonResponse
     {
         if ($request->isMethod('POST')) {
             $req = json_decode($request->getContent());
@@ -73,12 +74,15 @@ class DemoConfigurationMultipleFormsController extends FrameworkBundleAdminContr
                     'id_product' => (int)$idProduct,
                 ]);
             }
+            return new JsonResponse([
+                'status' => 'success',
+                'message' => 'Shipping rule created successfully.',
+                'id_shipping_rule' => $idShippingRule,
+            ]);
         }
-
-        return $this->redirectToRoute('demo_configuration_multiple_forms');
     }
 
-    public function updateShippingRule(Request $request): RedirectResponse
+    public function updateShippingRule(Request $request): JsonResponse
     {
         if ($request->isMethod('POST')) {
             $req = json_decode($request->getContent());
@@ -101,12 +105,17 @@ class DemoConfigurationMultipleFormsController extends FrameworkBundleAdminContr
                     'id_product' => (int)$idProduct,
                 ]);
             }
+            return new JsonResponse([
+                'status' => 'success',
+                'message' => 'Shipping rule updated successfully.',
+                'id_shipping_rule' => $id,
+            ]);
         }
 
-        return $this->redirectToRoute('admin_demo_configuration_multiple_forms');
+        
     }
 
-    public function deleteShippingRule(Request $request): RedirectResponse
+    public function deleteShippingRule(Request $request): JsonResponse
     {
         if ($request->isMethod('POST')) {
             $req = json_decode($request->getContent());
@@ -114,7 +123,15 @@ class DemoConfigurationMultipleFormsController extends FrameworkBundleAdminContr
             \Db::getInstance()->delete('shipping_rules', 'id_shipping_rule = ' . (int)$id);
             \Db::getInstance()->delete('shipping_rule_products', 'id_shipping_rule = ' . (int)$id);
 
-            return $this->redirectToRoute('admin_demo_configuration_multiple_forms');
+            
+            return new JsonResponse([
+                'status' => 'success',
+                'message' => 'Successfully deleted.',
+            ], 200);
         }
+        return new JsonResponse([
+            'status' => 'error',
+            'message' => 'Invalid request method.',
+        ], 400);
     }
 }

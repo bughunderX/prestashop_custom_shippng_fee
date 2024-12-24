@@ -70,12 +70,12 @@
                               </tr>
                             </thead>
                             <tbody id="shipping-rules-table">
-                              {% for row in demoConfigurationOtherForm.vars.value.table_data %}
-                                <tr data-id="{{ row.id }}">
+                              {% for row in shippingRules %}
+                                <tr data-id="{{ row.id_shipping_rule }}">
                                   <td>
                                     <select class="form-control" name="products" multiple data-multi-select>
                                       {% for product in products %}
-                                        <option value="{{ product.id_product }}" {% if product.id_product in row.products %}selected{% endif %}>
+                                        <option value="{{ product.id_product }}" {% if product.id_product in row.product_ids %}selected{% endif %}>
                                           {{ product.name }}
                                         </option>
                                       {% endfor %}
@@ -84,16 +84,16 @@
                                   <td>
                                     <select class="form-control" name="country">
                                       {% for country in countries %}
-                                        <option value="{{ country.id_country }}" {% if country.id_country == row.country %}selected{% endif %}>
+                                        <option value="{{ country.id_country }}" {% if country.id_country == row.id_country %}selected{% endif %}>
                                           {{ country.name }}
                                         </option>
                                       {% endfor %}
                                     </select>
                                   </td>
-                                  <td><input type="number" class="form-control" name="start_fee" value="{{ row.start_fee }}"></td>
-                                  <td><input type="number" class="form-control" name="extra_fee" value="{{ row.extra_fee }}"></td>
+                                  <td><input type="number" class="form-control" name="start_fee" value="{{ row.shipping_start_rate }}"></td>
+                                  <td><input type="number" class="form-control" name="extra_fee" value="{{ row.shipping_extra_rate }}"></td>
                                   <td>
-                                    <button class="btn btn-success update-row">{{ 'Update'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</button>
+                                    <button class="btn btn-success save-row">{{ 'Update'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</button>
                                     <button class="btn btn-danger delete-row">{{ 'Delete'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</button>
                                   </td>
                                 </tr>

@@ -10,10 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add a new row
     addRowButton.addEventListener('click', (e) => {
         e.preventDefault();
-        console.log(shippingRules);
+        const tp = table.querySelector('tr[data-id="-1"]');
+        if( tp ) return;
         const countriesArray = Object.values(countries);
         const newRow = `
-            <tr>
+            <tr data-id="-1">
                 <td>
                     <select class="form-control" name="products" multiple data-multi-select>
                         ${products.map(product => `<option value="${product.id_product}">${product.name}</option>`).join('')}
@@ -28,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td><input type="number" class="form-control" name="extra_fee" value="0"></td>
                 <td>
                     <button class="btn btn-success save-row">Save</button>
+                    <button class="btn btn-danger delete-row">Cancel</button>
                 </td>
             </tr>
         `;
@@ -41,22 +43,24 @@ document.addEventListener('DOMContentLoaded', () => {
     table.addEventListener('click', async (event) => {
         event.preventDefault();
         if (event.target.classList.contains('save-row')) {
-            alert('save action');
             const row = event.target.closest('tr');
+            console.log(row);
+            const rowId = row.getAttribute('data-id');
             const products = Array.from(row.querySelectorAll('input[name="products[]"]')).map(input => input.value);
             const country = row.querySelector('select[name="country"]').value;
             const startFee = row.querySelector('input[name="start_fee"]').value;
             const extraFee = row.querySelector('input[name="extra_fee"]').value;
-
             const data = {
+                id: rowId,
                 id_country: country,
                 shipping_start_rate: startFee,
                 shipping_extra_rate: extraFee,
                 products: products
             };
             console.log(data);
+            const url = rowId === '-1' ? addShippingRuleUrl : updateShippingRuleUrl;
             try {
-                const response = await fetch(addShippingRuleUrl, {
+                const response = await fetch(url, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -65,9 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify(data)
                 });
 
-                if (response.ok) {
                     const result = await response.json();
-                    console.log('Shipping rule created:', result);
+                if (result.status === 'success') {
+                    location.reload();
                     // Optionally, update the UI or provide feedback to the user
                 } else {
                     console.error('Failed to create shipping rule:', response.statusText);
@@ -82,11 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
     table.addEventListener('click', (event) => {
         event.preventDefault();
         if (event.target.classList.contains('delete-row')) {
-            alert('delete row');
             const row = event.target.closest('tr');
             const rowId = row.getAttribute('data-id');
 
-            if (!rowId) {
+            if (rowId === -1) {
                 row.remove();
                 return;
             }
@@ -94,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = new URLSearchParams();
             data.append('row_id', rowId);
 
-            fetch(deleteUrl, {
+            fetch(deleteShippingRuleUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -104,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
                 .then(response => response.json())
                 .then(responseData => {
-                    if (responseData.success) {
+                    if (responseData.status === 'success') {
                         row.remove();
                     } else {
                         alert('Error deleting row: ' + responseData.error);

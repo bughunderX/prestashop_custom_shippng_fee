@@ -22,12 +22,12 @@ create_shipping_rule:
     _controller: 'PrestaShop\Module\DemoSymfonyForm\Controller\DemoConfigurationMultipleFormsController::createShippingRule'
 update_shipping_rule:
   path: /admin/demo-configuration-multiple-forms/update-shipping-rule
-  methods: [PUT]
+  methods: [POST]
   defaults:
     _controller: 'PrestaShop\Module\DemoSymfonyForm\Controller\DemoConfigurationMultipleFormsController::updateShippingRule'
 
 delete_shipping_rule:
   path: /admin/demo-configuration-multiple-forms/delete-shipping-rule
-  methods: [DELETE]
+  methods: [POST]
   defaults:
     _controller: 'PrestaShop\Module\DemoSymfonyForm\Controller\DemoConfigurationMultipleFormsController::deleteShippingRule'
