@@ -8,6 +8,7 @@ use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\Annotation\Route;
 
 class DemoConfigurationMultipleFormsController extends FrameworkBundleAdminController
 {
@@ -19,26 +20,44 @@ class DemoConfigurationMultipleFormsController extends FrameworkBundleAdminContr
         $products = \Product::getProducts($this->getContext()->language->id, 0, 0, 'id_product', 'ASC', false, true);
 
         // Fetch shipping rules and their associated products
-        $shippingRules = \Db::getInstance()->executeS('SELECT * FROM ' . _DB_PREFIX_ . 'shipping_rules');
+        $shippingRules = \Db::getInstance()->executeS('
+            SELECT 
+                sr.id_shipping_rule,
+                sr.id_country,
+                sr.shipping_start_rate,
+                sr.shipping_extra_rate,
+                GROUP_CONCAT(srp.id_product ORDER BY srp.id_product ASC) AS product_ids
+            FROM ' . _DB_PREFIX_ . 'shipping_rules sr
+            LEFT JOIN ' . _DB_PREFIX_ . 'shipping_rule_products srp ON srp.id_shipping_rule = sr.id_shipping_rule
+            GROUP BY sr.id_shipping_rule
+        ');
         foreach ($shippingRules as &$rule) {
-            $rule['products'] = \Db::getInstance()->executeS('SELECT * FROM ' . _DB_PREFIX_ . 'shipping_rule_products WHERE id_shipping_rule = ' . (int)$rule['id_shipping_rule']);
+            $rule['product_ids'] = !empty($rule['product_ids']) ? explode(',', $rule['product_ids']) : [];
         }
+        
+        $addShippingRuleUrl = $this->generateUrl('create_shipping_rule');
+        $updateShippingRuleUrl = $this->generateUrl('update_shipping_rule');
+        $deleteShippingRuleUrl = $this->generateUrl('delete_shipping_rule');
 
         return $this->render('@Modules/demosymfonyform/views/templates/admin/multipleForms.html.twig', [
             'demoConfigurationOtherForm' => $otherForm->createView(),
             'countries' => $countries,
             'products' => $products,
             'shippingRules' => $shippingRules,
+            'addShippingRuleUrl' => $addShippingRuleUrl,
+            'updateShippingRuleUrl' => $updateShippingRuleUrl,
+            'deleteShippingRuleUrl' => $deleteShippingRuleUrl,
         ]);
     }
 
     public function createShippingRule(Request $request): RedirectResponse
     {
         if ($request->isMethod('POST')) {
-            $idCountry = (int)$request->request->get('id_country');
-            $startRate = (float)$request->request->get('shipping_start_rate');
-            $extraRate = (float)$request->request->get('shipping_extra_rate');
-            $products = $request->request->get('products', []);
+            $req = json_decode($request->getContent());
+            $idCountry = (int)$req -> id_country;
+            $startRate = (float)$req -> shipping_start_rate;
+            $extraRate = (float)$req -> shipping_extra_rate;
+            $products = $req -> products;
 
             \Db::getInstance()->insert('shipping_rules', [
                 'id_country' => $idCountry,
@@ -56,16 +75,18 @@ class DemoConfigurationMultipleFormsController extends FrameworkBundleAdminContr
             }
         }
 
-        return $this->redirectToRoute('admin_demo_configuration_multiple_forms');
+        return $this->redirectToRoute('demo_configuration_multiple_forms');
     }
 
-    public function updateShippingRule($id, Request $request): RedirectResponse
+    public function updateShippingRule(Request $request): RedirectResponse
     {
         if ($request->isMethod('POST')) {
-            $idCountry = (int)$request->request->get('id_country');
-            $startRate = (float)$request->request->get('shipping_start_rate');
-            $extraRate = (float)$request->request->get('shipping_extra_rate');
-            $products = $request->request->get('products', []);
+            $req = json_decode($request->getContent());
+            $id = (int)$req -> id;
+            $idCountry = (int)$req -> id_country;
+            $startRate = (float)$req -> shipping_start_rate;
+            $extraRate = (float)$req -> shipping_extra_rate;
+            $products = $req -> products;
 
             \Db::getInstance()->update('shipping_rules', [
                 'id_country' => $idCountry,
@@ -74,7 +95,6 @@ class DemoConfigurationMultipleFormsController extends FrameworkBundleAdminContr
             ], 'id_shipping_rule = ' . (int)$id);
 
             \Db::getInstance()->delete('shipping_rule_products', 'id_shipping_rule = ' . (int)$id);
-
             foreach ($products as $idProduct) {
                 \Db::getInstance()->insert('shipping_rule_products', [
                     'id_shipping_rule' => $id,
@@ -86,11 +106,15 @@ class DemoConfigurationMultipleFormsController extends FrameworkBundleAdminContr
         return $this->redirectToRoute('admin_demo_configuration_multiple_forms');
     }
 
-    public function deleteShippingRule($id): RedirectResponse
+    public function deleteShippingRule(Request $request): RedirectResponse
     {
-        \Db::getInstance()->delete('shipping_rules', 'id_shipping_rule = ' . (int)$id);
-        \Db::getInstance()->delete('shipping_rule_products', 'id_shipping_rule = ' . (int)$id);
+        if ($request->isMethod('POST')) {
+            $req = json_decode($request->getContent());
+            $id = (int)$req -> id;
+            \Db::getInstance()->delete('shipping_rules', 'id_shipping_rule = ' . (int)$id);
+            \Db::getInstance()->delete('shipping_rule_products', 'id_shipping_rule = ' . (int)$id);
 
-        return $this->redirectToRoute('admin_demo_configuration_multiple_forms');
+            return $this->redirectToRoute('admin_demo_configuration_multiple_forms');
+        }
     }
 }

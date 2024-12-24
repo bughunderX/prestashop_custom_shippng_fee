@@ -15,23 +15,19 @@ demo_configuration_multiple_forms:
     _legacy_controller: AdminDemoSymfonyFormMultipleForms
     _legacy_link: AdminDemoSymfonyFormMultipleForms
 
-demo_configuration_choices_form_save:
-  path: /demosymfonyform/configurationMultipleForms/saveChoices
-  methods: [ POST ]
+create_shipping_rule:
+  path: /admin/demo-configuration-multiple-forms/create-shipping-rule
+  methods: [POST]
   defaults:
-    _controller: 'PrestaShop\Module\DemoSymfonyForm\Controller\DemoConfigurationMultipleFormsController::saveChoicesForm'
+    _controller: 'PrestaShop\Module\DemoSymfonyForm\Controller\DemoConfigurationMultipleFormsController::createShippingRule'
+update_shipping_rule:
+  path: /admin/demo-configuration-multiple-forms/update-shipping-rule
+  methods: [PUT]
+  defaults:
+    _controller: 'PrestaShop\Module\DemoSymfonyForm\Controller\DemoConfigurationMultipleFormsController::updateShippingRule'
 
-demo_configuration_other_form_save:
-  path: /demosymfonyform/configurationMultipleForms/saveOther
-  methods: [ POST ]
+delete_shipping_rule:
+  path: /admin/demo-configuration-multiple-forms/delete-shipping-rule
+  methods: [DELETE]
   defaults:
-    _controller: 'PrestaShop\Module\DemoSymfonyForm\Controller\DemoConfigurationMultipleFormsController::saveOtherForm'
-
-demo_geocoordinates_form:
-  path: /demosymfonyform/geoCoordinatesForm
-  methods: [GET, POST]
-  defaults:
-    _controller: 'PrestaShop\Module\DemoSymfonyForm\Controller\DemoGeoCoordinatesFormController::index'
-    # Needed to work with tab system
-    _legacy_controller: AdminDemoSymfonyForm
-    _legacy_link: AdminDemoSymfonyForm
+    _controller: 'PrestaShop\Module\DemoSymfonyForm\Controller\DemoConfigurationMultipleFormsController::deleteShippingRule'

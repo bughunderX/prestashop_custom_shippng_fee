@@ -31,62 +31,75 @@
     <link rel="stylesheet" href="{{ asset('../modules/demosymfonyform/views/css/multipleForms.css') }}" type="text/css" media="all">
   {% endblock %}
 
+{% block javascripts %}
+  {{ parent() }}
+    <script>
+        const products = {{ products|json_encode|raw }};
+        const countries = {{ countries|json_encode|raw }};
+        const shippingRules = {{ shippingRules|json_encode|raw }};
+        const addShippingRuleUrl = '{{ addShippingRuleUrl }}';
+        const updateShippingRuleUrl = '{{ updateShippingRuleUrl }}';
+        const deleteShippingRuleUrl = '{{ deleteShippingRuleUrl }}';
+    </script>
+  <script src="{{ asset('../modules/demosymfonyform/views/js/multipleForms.js') }}"></script>
+  <script src="{{ asset('../modules/demosymfonyform/views/js/MultiSelect.js') }}"></script>
+{% endblock %}
 {% block content %}
 
-  {{ form_start(demoConfigurationOtherForm, {attr : {class: 'form'}, action: path('demo_configuration_other_form_save') }) }}
+  {{ form_start(demoConfigurationOtherForm, {attr : {class: 'form'}, action: path('demo_configuration_multiple_forms') }) }}
   <div class="card">
     <h3 class="card-header">
       <i class="material-icons">settings</i> {{ 'Table Data'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}
     </h3>
     <div class="card-body">
+
+
       <div class="form-wrapper">
           <div class="form-group row">
-              {% dump(countries) %}
               <div class="col-sm">
-                  {% if demoConfigurationOtherForm.vars.value.table_data is not empty %}
-                      <table class="table table-bordered">
-                          <thead>
-                          <tr>
-                              <th>Products</th>
-                              <th>Country</th>
-                              <th>Start Fee</th>
-                              <th>Extra Fee</th>
-                              <th>Actions</th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                          {% for row in demoConfigurationOtherForm.vars.value.table_data %}
+                  <button class="btn btn-primary add-row mb-3">{{ 'Add Row'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</button>
+                  {% if shippingRules %}
+                          <table class="table table-bordered" id='shipping-rules-table'>
+                            <thead>
                               <tr>
-                              <td>
-                                <select class="form-control" name="products[]" multiple data-multi-select>
-                                  {% for product in products %}
-                                    <option value="{{ product.id_product }}">{{ product.name }}</option>
-                                  {% endfor %}
-                                </select>
-                              </td>
-                              <td>
-                                <select class="form-control" name="countries[]">
-                                  {% for country in countries %}
-                                  <option value="{{ country.id_country }}" {% if country.id_country == row.country %}selected{% endif %}>
-                                    {{ country.name }}
-                                  </option>
-                                      {{ country.name }}
-                                    </option>
-                                  {% endfor %}
-                                </select>
-                              </td>
-
-                                  {# <td><input type="text" class="form-control" value="{{ row.country }}"></td> #}
-                                  <td><input type="number" class="form-control" value="{{ row.start_fee }}"></td>
-                                  <td><input type="number" class="form-control" value="{{ row.extra_fee }}"></td>
-                                  <td>
-                                     <button class="btn btn-sm btn-primary save-row">Save</button>
-                                      <button class="btn btn-sm btn-danger delete-row" disabled>Delete</button>
-                                  </td>
+                                <th>{{ 'Products'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</th>
+                                <th>{{ 'Country'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</th>
+                                <th>{{ 'Start Fee'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</th>
+                                <th>{{ 'Extra Fee'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</th>
+                                <th>{{ 'Actions'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</th>
                               </tr>
-                          {% endfor %}
-                          </tbody>
-                      </table>
+                            </thead>
+                            <tbody id="shipping-rules-table">
+                              {% for row in demoConfigurationOtherForm.vars.value.table_data %}
+                                <tr data-id="{{ row.id }}">
+                                  <td>
+                                    <select class="form-control" name="products" multiple data-multi-select>
+                                      {% for product in products %}
+                                        <option value="{{ product.id_product }}" {% if product.id_product in row.products %}selected{% endif %}>
+                                          {{ product.name }}
+                                        </option>
+                                      {% endfor %}
+                                    </select>
+                                  </td>
+                                  <td>
+                                    <select class="form-control" name="country">
+                                      {% for country in countries %}
+                                        <option value="{{ country.id_country }}" {% if country.id_country == row.country %}selected{% endif %}>
+                                          {{ country.name }}
+                                        </option>
+                                      {% endfor %}
+                                    </select>
+                                  </td>
+                                  <td><input type="number" class="form-control" name="start_fee" value="{{ row.start_fee }}"></td>
+                                  <td><input type="number" class="form-control" name="extra_fee" value="{{ row.extra_fee }}"></td>
+                                  <td>
+                                    <button class="btn btn-success update-row">{{ 'Update'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</button>
+                                    <button class="btn btn-danger delete-row">{{ 'Delete'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</button>
+                                  </td>
+                                </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
                   {% else %}
                       <p>{{ 'No table data found.'|trans({}, 'Modules.DemoSymfonyForm.Admin') }}</p>
                   {% endif %}
@@ -96,10 +109,4 @@
     </div>
   </div>
   {{ form_end(demoConfigurationOtherForm) }}
-{% endblock %}
-
-{% block javascripts %}
-  {{ parent() }}
-  <script src="{{ asset('../modules/demosymfonyform/views/js/multipleForms.js') }}"></script>
-  <script src="{{ asset('../modules/demosymfonyform/views/js/MultiSelect.js') }}"></script>
 {% endblock %}
